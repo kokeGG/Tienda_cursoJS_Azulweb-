@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script src="./database/index.js"></script>
+    <script src="./script/objetos.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>LA GRANJA - Almacen</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3 id="cash">Capital: </h3>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseProducts" role="button" 
+                aria-expanded="false" aria-controls="collapseExample">
+                    Inventario
+                </a>
+            </p>
+            <div class="collapse" id="collapseProducts">
+                <table class="table" id="productTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Existencia (kg)</th>
+                            <th scope="col">Precio por kg (MXN)</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button type="button" id="addProductBtn" class="btn btn-success">Añadir producto</button>
+                <form style="display: none;" id="addProduct" >
+                    <div class="form-group">
+                        <label for="np_ame">Nombre</label>
+                        <input type="text" class="form-control" id="np_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="np_stored">Existencia kg</label>
+                        <input type="text" class="form-control" id="np_stored">
+                    </div>
+                    <div class="form-group">
+                        <label for="np_p_price">Precio a la compra por kilo</label>
+                        <input type="text" class="form-control" id="np_p_price">
+                    </div>
+                    <div class="form-group">
+                        <label for="np_s_price">Precio a la venta por kilo</label>
+                        <input type="text" class="form-control" id="np_s_price">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                    <button type="button" class="btn btn-danger" id="cancelNewProd">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./script/index.js"></script>
+
+</html>
