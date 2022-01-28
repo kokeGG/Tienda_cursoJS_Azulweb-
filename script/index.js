@@ -1,6 +1,7 @@
 let cash = _cashier(db_cash);
 let products = _products(db_productos);
 let purchase = _purchase(db_purchase);
+let sales = _sales(db_sales);
 
 const getCash = () => {
     let cashText = document.getElementById('cash');
@@ -52,6 +53,30 @@ const sellButtonEvent = (id) =>
         <button type ="button" class = "btn btn-danger" id = "cancelSell">Cancelar</button>
     </div>
     `;
+    document.getElementById("btnSellItem").addEventListener("click",(e) => {
+        const amount = document.getElementById("sellItem").value;
+        sellProductAction(product, new Number(amount));
+    });
+
+    document.getElementById("cancelSell").addEventListener("click", cancelOp);
+}
+
+const sellProductAction = (product, amount) => {
+    try {
+        const totalSale = amount * product.price;
+        products.sale(product.id, amount);
+        cash.sale(totalSale);
+        sales.new(product.id, amount, product.price);
+    } catch (err) {
+        alert(err.error)
+    }
+    buildTable();
+    getCash();
+    cancelOp();
+}
+
+const cancelOp = () => {
+    document.getElementById("sellContainer").innerHTML = "";
 }
 
 const newProductEvent = () => {
