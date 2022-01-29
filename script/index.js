@@ -1,3 +1,4 @@
+// asignamos variables con la BD
 let cash = _cashier(db_cash);
 let products = _products(db_productos);
 let purchase = _purchase(db_purchase);
