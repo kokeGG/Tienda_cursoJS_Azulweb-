@@ -30,6 +30,9 @@ const buildTable = () => {
         document.getElementById(sellButton).addEventListener('click', (e) => {
             sellButtonEvent(elemento.id);
         });
+        document.getElementById(purchaseButton).addEventListener('click', (e) => {
+            purchaseButtonEvent(elemento.id);
+        });
     });
 };
 
@@ -62,6 +65,35 @@ const sellButtonEvent = (id) =>
     document.getElementById("cancelSell").addEventListener("click", cancelOp);
 }
 
+const purchaseButtonEvent= (id) => {
+    let container = document.getElementById("purchaseContainer");
+    let product = products.getProduct(id);
+    container.innerHTML = `
+    <div class= "col">
+        <h5>${product.name}</h5></div>
+    </div>
+    <div class = "col">
+        <h6>Existencia: ${product.stored} kg</h6></div>
+    </div>
+    <div class = "col">
+        <label for = "sellItem">Cantidad a comprar(kg)</label>
+        <input type = "text" class= "form-control" id = "purchaseItem">
+        <label for= "sellItem">Precio de compra(kg)</label>
+        <input type="text" class="form-control" id="purchasePrice">
+        <button type = "button" class="btn btn-success" id="btnPurchaseItem">Comprar</button>
+    </div>
+    <div class="col">
+        <button type="button" class="btn btn-danger" id="cancelPurchase">Cancelar</button>
+    </div>
+    `;
+    document.getElementById('btnPurchaseItem').addEventListener("click", (e) => {
+        const amount = document.getElementById('purchaseItem').value;
+        const price = document.getElementById('purchasePrice').value;
+        purchaseProductAction(product, new Number(amount), new Number(price));
+    });
+    document.getElementById("cancelPurchase").addEventListener("click", cancelOp);
+};
+
 const sellProductAction = (product, amount) => {
     try {
         const totalSale = amount * product.price;
@@ -76,8 +108,23 @@ const sellProductAction = (product, amount) => {
     cancelOp();
 }
 
+const purchaseProductAction = (product, amount, price) => {
+    try {
+        const total = price * amount;
+        products.purchase(product.id, amount);
+        cash.purchase(total);
+        purchase.new(product.id, amount, price);
+    } catch (err) {
+        alert(err.error);
+    }
+    buildTable();
+    getCash();
+    cancelOp();
+};
+
 const cancelOp = () => {
     document.getElementById("sellContainer").innerHTML = "";
+    document.getElementById('purchaseContainer').innerHTML = "";
 }
 
 const newProductEvent = () => {
