@@ -36,6 +36,41 @@ const buildTable = () => {
     });
 };
 
+const buildSaleTable = () => {
+    let table = document.getElementById("salesTable");
+    let lista = table.getElementsByTagName("tbody")[0];
+    lista.innerHTML = "";
+    sales.getAllSales().forEach(element => {
+        let row = document.createElement("tr");
+        let date = moment(element.date);
+        row.innerHTML = `
+        <th scope = "row">${element.productId}</th>
+        <td>${date.format(`LLLL`)}</td>
+        <td>${element.quantity}</td>
+        <td>${element.totalPrice}</td>
+        `;
+        lista.appendChild(row);
+    });
+}
+
+const buildPurchaseTable = () => {
+    let table = document.getElementById("purchaseTable");
+    let lista = table.getElementsByTagName("tbody")[0];
+    lista.innerHTML = "";
+    purchase.getAllPurchase().forEach((element) => {
+        let row = document.createElement("tr");
+        let date = moment(element.date);
+        row.innerHTML = `
+        <th scope = "row">${element.productId}</th>
+        <td>${date.format(`LLLL`)}</td>
+        <td>${element.quantity}</td>
+        <td>${element.price}</td>
+        <td>${element.totalPrice}</td>
+        `;
+        lista.appendChild(row);
+    });
+}
+
 const sellButtonEvent = (id) =>
 {
     let container = document.getElementById("sellContainer");
@@ -105,6 +140,7 @@ const sellProductAction = (product, amount) => {
     }
     buildTable();
     getCash();
+    buildSaleTable();
     cancelOp();
 }
 
@@ -119,6 +155,7 @@ const purchaseProductAction = (product, amount, price) => {
     }
     buildTable();
     getCash();
+    buildPurchaseTable();
     cancelOp();
 };
 
@@ -136,19 +173,19 @@ const newProductEvent = () => {
     try {
         cash.purchase(stored * purchasePrice);
         const newProd = products.newProduct(name, stored, salePrice);
-        purchase.new(newProd.id, stored, purchase);
+        purchase.new(newProd.id, stored, purchasePrice);
     } catch (err) {
         alert(err.error);
     }
 
     buildTable();
     getCash();
-    document.getElementById('addProduct').reset();
+    buildPurchaseTable();
+    //document.getElementById('addProduct').reset();
     addProductEventEnd();
     
 
 }
-
 
 const submitEvent = (e) => {
     e.preventDefault();
@@ -177,6 +214,8 @@ const addProductEventEnd = () => {
 
 addEventListener("load", getCash);
 addEventListener("load", buildTable);
+addEventListener("load",buildSaleTable);
+addEventListener("load",buildPurchaseTable);
 addEventListener("submit", submitEvent);
 document.getElementById("addProductBtn").addEventListener("click", addProductEventStart);
 document.getElementById("cancelNewProd").addEventListener("click", addProductEventEnd);

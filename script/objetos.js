@@ -95,8 +95,8 @@ const _purchase = (start) => {
                 productId: id, 
                 date: new Date(), 
                 quantity: quantity, 
-                totalPrice: quantity * price,
-                price: price
+                price: price,
+                totalPrice: quantity * price
             });
         },
         getAllPurchase: () => {

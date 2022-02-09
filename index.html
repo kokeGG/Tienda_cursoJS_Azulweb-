@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inventario</title>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
@@ -73,6 +74,49 @@
                 </div>
                 <div class="row" id="purchaseContainer">
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Ventas
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample2">
+                <table class="table" id="salesTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Codigo Producto</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total(MXN)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Compras
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample3">
+                <table class="table" id="purchaseTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Codigo Producto</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio compra(MXN)</th>
+                            <th scope="col">Total(MXN)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
